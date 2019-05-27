@@ -1,16 +1,18 @@
 # Nokeval temperature sensor reader
 
-## Build
+## Prerequisites
 
 ### Mac (for development)
 
 ```
 $ brew install golang
+$ mkdir ~/go
 ```
 
 ### Raspberry pi
 
-#### Prerequisites
+Run all of the following steps on your raspberry pi.
+
 Install:
 
 ```
@@ -19,13 +21,23 @@ $ apt install -y golang git
 $ mkdir ~/go
 ```
 
+
+## Setup your environment
+
+Create directory for your Golang build environment:
+
+```
+$ mkdir ~/go
+```
+
+
 Remember to execute this (or add this to your `.bash_profile` or so) every time you login:
 
 ```
 $ export GOPATH=~/go
 ```
 
-#### Get the code
+## Get the code
 The reader itself:
 
 ```
@@ -41,13 +53,13 @@ $ go get -v github.com/jacobsa/go-serial/serial
 $ go get -v gopkg.in/yaml.v2
 ```
 
-#### Build
+## Build
 ```
 $ cd ~/go/src/github.com/hkroger/nokeval-reader-go/
 $ go build -o nokeval-reader cmd/reader/main.go
 ```
 
-#### Run
+## Run
 
 Verbose mode:
 

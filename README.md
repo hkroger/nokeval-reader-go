@@ -1,6 +1,37 @@
 # Nokeval temperature sensor reader
+This is a utility which reads the measurements of a wireless thermometer Measurinator.com service. This works with Nokeval FTR970B and compatible devices.
 
-## Prerequisites
+It can be run as a daemon and an example launchd configuration file is included.
+
+## How to use	
+### Easy install for Debian/Raspbian 9 (Stretch)
+
+Open apt-get file in editor:
+
+    vim /etc/apt/sources.list.d/measurinator.list
+
+Add:
+
+    deb [trusted=yes] http://koti.kapsi.fi/hkroger/debs/stretch ./
+
+Save & run:
+
+	apt update
+	apt-get install nokeval-reader
+
+Edit configs:
+
+	cd /opt/nokeval_reader
+	cp config.yaml.example config.yaml
+	vim config.yaml
+	
+Add key where it says `<key here>` and client id where it says `<client id here>`.
+
+And start the service
+
+	systemctl start nokeval_reader
+
+## Development
 
 ### Mac (for development)
 
@@ -17,10 +48,21 @@ Install:
 
 ```
 $ apt update
-$ apt install -y golang git
+$ apt install -y git
+$ wget https://dl.google.com/go/go1.13.1.linux-armv6l.tar.gz
+$ tar xzvf go1.13.1.linux-armv6l.tar.gz
+$ sudo mv go /usr/local
 $ mkdir ~/go
+
+
 ```
 
+To run stuff:
+
+```
+$ export PATH=/usr/local/go/bin:$PATH
+$ export GOROOT=/usr/local/go
+```
 
 ## Setup your environment
 
@@ -62,4 +104,11 @@ Production mode:
 
 ```
 $ ./nokeval-reader -c  /opt/nokeval_reader/config.yaml
+```
+
+## Build the deb (has to be on Raspberry pi)
+
+```
+$ cd ~/go/src/github.com/hkroger/nokeval-reader-go/
+$ ./build_deb.sh
 ```

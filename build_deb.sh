@@ -14,7 +14,7 @@ mkdir -p "$READER_TARGET"
 mkdir -p "$SERVICE_TARGET"
 
 # Start building
-GOOS=linux GOARCH=arm GOARM=5 go build -o nokeval-reader-arm cmd/reader/main.go
+GOOS=linux GOARCH=arm GOARM=5 go build -o nokeval_reader_arm cmd/reader/main.go
 
 # Package
 cp nokeval_reader_arm "$READER_TARGET"/nokeval_reader

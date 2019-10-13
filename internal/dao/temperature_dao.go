@@ -34,8 +34,6 @@ func (dao MeasurementDAO) Store(reading measurement.Measurement) error {
 	content["version"] = 2
 	content["checksum"] = generateChecksum(content, dao.DatabaseConfig.Secret)
 
-	log.Debug("1")
-
 	for _, url := range dao.DatabaseConfig.OverrideUrls {
 		jsonValue, err := json.Marshal(content)
 
@@ -50,7 +48,7 @@ func (dao MeasurementDAO) Store(reading measurement.Measurement) error {
 		response, err := client.Do(request)
 
 		if err != nil {
-			log.Errorf("Technical error when trying to speak HTTP: %s", err)
+			return fmt.Errorf("Technical error when trying to speak HTTP: %s", err)
 		}
 
 		if response.StatusCode >= 200 && response.StatusCode < 300 {

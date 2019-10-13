@@ -56,7 +56,6 @@ func (buffer *MeasurementBuffer) Flush(dao *dao.MeasurementDAO) error {
 			}
 		} else {
 			log.Errorf("DAO storage failed: %s", err)
-
 		}
 	}
 

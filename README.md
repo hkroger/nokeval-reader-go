@@ -41,16 +41,7 @@ $ export GOPATH=~/go
 The reader itself:
 
 ```
-$ go get -v github.com/hkroger/nokeval-reader-go
-```
-
-Get deps:
-
-```
-$ go get -v github.com/bvinc/go-sqlite-lite
-$ go get -v github.com/sirupsen/logrus
-$ go get -v github.com/jacobsa/go-serial/serial
-$ go get -v gopkg.in/yaml.v2
+$ go get -v github.com/hkroger/nokeval-reader-go/...
 ```
 
 ## Build

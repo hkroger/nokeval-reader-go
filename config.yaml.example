@@ -1,0 +1,10 @@
+serial:
+  device: "/dev/ttyUSB0"
+  baud: 9600
+  bits: 8
+  stopbits: 1
+database:
+  type: rest_storage
+  key: 12345678-d0fe-4c9c-1234-8d976e1f64ee
+  client_id: 12345678-4247-11e9-1234-7ffe3f8caba8
+buffer_file: "/tmp/measurements.sqlite3"

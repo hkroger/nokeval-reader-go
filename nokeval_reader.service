@@ -1,0 +1,15 @@
+[Unit]
+Description=Nokeval reader (go)
+After=syslog.target network-online.target
+
+[Service]
+Type=simple
+User=reader
+Group=dialout
+ExecStart=/opt/nokeval_reader/nokeval-reader -v -c  /opt/nokeval_reader/config.yaml
+Restart=on-failure
+RestartSec=30s
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

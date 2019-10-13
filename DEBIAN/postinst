@@ -1,0 +1,13 @@
+#!/bin/sh
+
+groupadd reader
+useradd -r reader -c "nokeval_reader" -g reader
+
+mkdir -p /var/lib/nokeval_reader/
+chown -R reader:reader /var/lib/nokeval_reader
+usermod reader -a -G dialout
+
+cd /opt/nokeval_reader/
+
+systemctl daemon-reload
+systemctl enable nokeval_reader.service

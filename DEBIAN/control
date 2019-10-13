@@ -1,0 +1,8 @@
+Package: nokeval-reader
+Priority: optional
+Section: misc
+Maintainer: Hannu Kroger <hkroger@gmail.com>
+Architecture: armhf
+Version: 1.0.14
+Depends: sqlite, libsqlite-dev, libsqlite3-dev
+Description: Nokeval temperature reader

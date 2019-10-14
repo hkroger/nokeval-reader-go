@@ -26,12 +26,12 @@ func (dao MeasurementDAO) Store(reading measurement.Measurement) error {
 	content := make(map[string]interface{})
 
 	content["client_id"] = dao.DatabaseConfig.ClientId
-	content["timestamp"] = fmt.Sprintf("%d", reading.Timestamp.Unix())
+	content["timestamp"] = fmt.Sprintf("%d", reading.Timestamp.UnixNano())
 	content["sensor_id"] = strconv.Itoa(reading.SensorId)
 	content["measurement"] = ftos(reading.Measurement)
 	content["voltage"] = ftos(reading.Voltage)
 	content["signal_strength"] = ftos(reading.SignalStrength)
-	content["version"] = 2
+	content["version"] = 3
 	content["checksum"] = generateChecksum(content, dao.DatabaseConfig.Secret)
 
 	for _, url := range dao.DatabaseConfig.OverrideUrls {
@@ -51,6 +51,7 @@ func (dao MeasurementDAO) Store(reading measurement.Measurement) error {
 			return fmt.Errorf("Technical error when trying to speak HTTP: %s", err)
 		}
 
+		defer response.Body.Close()
 		if response.StatusCode >= 200 && response.StatusCode < 300 {
 			log.Debugf("Measurement stored in %s successfully", url)
 			return nil

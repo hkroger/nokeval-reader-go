@@ -15,7 +15,7 @@ import (
 )
 
 type MeasurementDAO struct {
-	DatabaseConfig config.DatabaseConfig
+	MeasurementStorageConfig config.MeasurementStorageConfig
 }
 
 func ftos(n float64) string {
@@ -25,16 +25,16 @@ func ftos(n float64) string {
 func (dao MeasurementDAO) Store(reading measurement.Measurement) error {
 	content := make(map[string]interface{})
 
-	content["client_id"] = dao.DatabaseConfig.ClientId
+	content["client_id"] = dao.MeasurementStorageConfig.ClientId
 	content["timestamp"] = fmt.Sprintf("%d", reading.Timestamp.UnixNano())
 	content["sensor_id"] = strconv.Itoa(reading.SensorId)
 	content["measurement"] = ftos(reading.Measurement)
 	content["voltage"] = ftos(reading.Voltage)
 	content["signal_strength"] = ftos(reading.SignalStrength)
 	content["version"] = 3
-	content["checksum"] = generateChecksum(content, dao.DatabaseConfig.Secret)
+	content["checksum"] = generateChecksum(content, dao.MeasurementStorageConfig.Secret)
 
-	for _, url := range dao.DatabaseConfig.OverrideUrls {
+	for _, url := range dao.MeasurementStorageConfig.OverrideUrls {
 		jsonValue, err := json.Marshal(content)
 
 		if err != nil {
